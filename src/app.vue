@@ -6,7 +6,7 @@
 export default {
   data() {
     return {
-      text: '123'
+      text: 'abc123'
     }
   }
 }
