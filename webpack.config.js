@@ -19,6 +19,10 @@ const config = {
         loader: 'vue-loader'
       },
       {
+        test: /\.js(x)$/,
+        loader: 'babel-loader'
+      },
+      {
         test: /\.css$/,
         use: [
           'vue-style-loader',
@@ -30,6 +34,12 @@ const config = {
         use: [
           'style-loader',
           'css-loader',
+          {
+            loader: 'postcss-loader',
+            options: {
+              sourceMap: true
+            }
+          },
           'sass-loader'
         ]
       },
