@@ -13,6 +13,7 @@
       {
         "auto": true
       }
-    ]
+    ],
+    "no-new": "off"
   }
 }
