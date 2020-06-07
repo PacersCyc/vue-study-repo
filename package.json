@@ -11,8 +11,12 @@
     "dev": "cross-env NODE_ENV=development webpack-dev-server --config build/webpack.config.client.js",
     "build": "yarn clean && yarn build:client",
     "lint": "eslint --ext .js,.jsx,.vue client/",
-    "lint-fix": "eslint --fix --ext .js,.jsx,.vue client/",
-    "precommit": "yarn lint"
+    "lint-fix": "eslint --fix --ext .js,.jsx,.vue client/"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn lint"
+    }
   },
   "devDependencies": {
     "@babel/core": "^7.10.2",
