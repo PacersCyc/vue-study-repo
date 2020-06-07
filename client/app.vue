@@ -20,7 +20,7 @@ export default {
     Footer,
     Todo
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>

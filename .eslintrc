@@ -1,0 +1,18 @@
+{
+  "extends": [
+    "standard"
+  ],
+  "plugins": [
+    "html",
+    "vuefix"
+  ],
+  "parser": "babel-eslint",
+  "rules": {
+    "vuefix/vuefix": [
+      2,
+      {
+        "auto": true
+      }
+    ]
+  }
+}
