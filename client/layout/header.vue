@@ -1,10 +1,12 @@
 <template>
-  <header class="main-header">
+  <header 
+    :class="$style.mainHeader"
+  >
     <h1>CTodo</h1>
   </header>
 </template>  
 
-<style lang="scss" scoped>
+<style lang="scss" module>
   .main-header{
     text-align: center;
     h1{
@@ -15,3 +17,7 @@
     }
   }
 </style>
+
+<docs>
+#123 = 456
+</docs>

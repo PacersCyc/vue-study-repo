@@ -19,6 +19,13 @@ const devServer = {
   hot: true
 }
 
+const cssLoaderOptions = {
+  modules: {
+    localIdentName: isDev ? '[path]-[name]-[hash:base64:5]' : '[hash:base64:5]'
+  },
+  localsConvention: 'camelCase'
+}
+
 const defaultPlugins = [
   new CleanWebpackPlugin(),
   new VueLoaderPlugin(),
@@ -39,16 +46,54 @@ if (isDev) {
       rules: [
         {
           test: /\.s[ac]ss$/,
-          use: [
-            'style-loader',
-            'css-loader',
+          oneOf: [
             {
-              loader: 'postcss-loader',
-              options: {
-                sourceMap: true
-              }
+              resourceQuery: /module/,
+              use: [
+                'vue-style-loader',
+                {
+                  loader: 'css-loader',
+                  options: cssLoaderOptions
+                },
+                {
+                  loader: 'postcss-loader',
+                  options: {
+                    sourceMap: true
+                  }
+                },
+                'sass-loader'
+              ]
             },
-            'sass-loader'
+            {
+              resourceQuery: /scoped/,
+              use: [
+                'vue-style-loader',
+                'css-loader',
+                {
+                  loader: 'postcss-loader',
+                  options: {
+                    sourceMap: true
+                  }
+                },
+                'sass-loader'
+              ]
+            },
+            {
+              use: [
+                'vue-style-loader',
+                {
+                  loader: 'css-loader',
+                  options: cssLoaderOptions
+                },
+                {
+                  loader: 'postcss-loader',
+                  options: {
+                    sourceMap: true
+                  }
+                },
+                'sass-loader'
+              ]
+            }
           ]
         }
       ]
@@ -74,21 +119,69 @@ if (isDev) {
       rules: [
         {
           test: /\.s[ac]ss$/,
-          use: [
+          oneOf: [
             {
-              loader: MiniCssExtractPlugin.loader,
-              options: {
-                hmr: process.env.NODE_ENV === 'development',
-              },
+              resourceQuery: /module/,
+              use: [
+                {
+                  loader: MiniCssExtractPlugin.loader,
+                  options: {
+                    hmr: process.env.NODE_ENV === 'development',
+                  },
+                },
+                {
+                  loader: 'css-loader',
+                  options: cssLoaderOptions
+                },
+                {
+                  loader: 'postcss-loader',
+                  options: {
+                    sourceMap: true
+                  }
+                },
+                'sass-loader'
+              ]
             },
-            'css-loader',
             {
-              loader: 'postcss-loader',
-              options: {
-                sourceMap: true
-              }
+              resourceQuery: /scoped/,
+              use: [
+                {
+                  loader: MiniCssExtractPlugin.loader,
+                  options: {
+                    hmr: process.env.NODE_ENV === 'development',
+                  },
+                },
+                'css-loader',
+                {
+                  loader: 'postcss-loader',
+                  options: {
+                    sourceMap: true
+                  }
+                },
+                'sass-loader'
+              ]
             },
-            'sass-loader'
+            {
+              use: [
+                {
+                  loader: MiniCssExtractPlugin.loader,
+                  options: {
+                    hmr: process.env.NODE_ENV === 'development',
+                  },
+                },
+                {
+                  loader: 'css-loader',
+                  options: cssLoaderOptions
+                },
+                {
+                  loader: 'postcss-loader',
+                  options: {
+                    sourceMap: true
+                  }
+                },
+                'sass-loader'
+              ]
+            }
           ]
         }
       ]
@@ -96,7 +189,7 @@ if (isDev) {
     plugins: defaultPlugins.concat([
       new MiniCssExtractPlugin({
         filename: '[name].[contenthash].css',
-        chunkFilename: '[id].[contenthash].css'
+        // chunkFilename: '[id].[contenthash].css'
       })
     ]),
     optimization: {

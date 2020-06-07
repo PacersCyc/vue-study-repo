@@ -3,6 +3,8 @@ const webpack = require('webpack')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const HtmlPlugin = require('html-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+const createVueLoaderOptions = require('./vue-loader.config')
+// const docsLoader = require.resolve('./doc-loader')
 
 const isDev = process.env.NODE_ENV === 'development'
 
@@ -15,9 +17,15 @@ const config = {
   },
   module: {
     rules: [
+      // .vue文件中自定义语言块 具体见https://vue-loader.vuejs.org/zh/guide/custom-blocks.html#example
+      // {
+      //   resourceQuery: /blockType=docs/,
+      //   loader: docsLoader
+      // },
       {
         test: /\.vue$/,
-        loader: 'vue-loader'
+        loader: 'vue-loader',
+        options: createVueLoaderOptions(isDev)
       },
       {
         test: /\.jsx$/,
