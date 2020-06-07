@@ -1,7 +1,7 @@
 <template>
   <div class="helper">
     <span class="left">
-      2 items left
+      {{unFinishedTodoLength}} items left
     </span>
     <span class="tabs">
       <span 
@@ -23,6 +23,10 @@ export default {
     filter: {
       type: String,
       required: true
+    },
+    todos: {
+      type: Array,
+      required: true
     }
   },
 
@@ -32,13 +36,19 @@ export default {
     }
   },
 
+  computed: {
+    unFinishedTodoLength() {
+      return this.todos.filter(todo => !todo.completed).length
+    }
+  },
+
   methods: {
     toggleFilter(state) {
-
+      this.$emit('toggle', state)
     },
 
     clearAllCompleted() {
-
+      this.$emit('clearAllCompleted')
     }
   }
 }
@@ -54,6 +64,7 @@ export default {
     background-color: #ffffff;
     font-size: 14px;
     font-smoothing: antialiased;
+
     .left, .clear, .tabs {
       padding: 0 10px;
       box-sizing: border-box;

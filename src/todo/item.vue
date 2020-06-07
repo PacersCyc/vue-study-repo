@@ -20,7 +20,7 @@ export default {
   },
   methods: {
     deleteTodo() {
-
+      this.$emit('del', this.todo.id)
     }
   }
 }
@@ -81,8 +81,8 @@ export default {
     margin: auto 0;
     border: none;
     appearance: none;
-    outline none
-    &:after{
+    outline: none;
+    &::after{
       content: url('../assets/images/round.svg')
     }
     &:checked:after{
