@@ -41,7 +41,7 @@ let config
 
 if (isDev) {
   config = merge(baseConfig, {
-    devtool: 'cheap-module-eval-source=-map',
+    // devtool: 'cheap-module-eval-source=-map', // 默认项
     module: {
       rules: [
         {
@@ -101,16 +101,16 @@ if (isDev) {
     devServer,
     plugins: defaultPlugins.concat([
       new webpack.HotModuleReplacementPlugin(),
-      new webpack.NoEmitOnErrorsPlugin()
+      // new webpack.NoEmitOnErrorsPlugin()
     ])
   })
 } else {
   config = merge(baseConfig, {
     entry: {
       app: path.join(__dirname, '../client/index.js'),
-      vendor: [
-        'vue',
-      ]
+      // vendor: [
+      //   'vue',
+      // ]
     },
     output: {
       filename: '[name].[chunkhash:8].js'
@@ -194,20 +194,21 @@ if (isDev) {
     ]),
     optimization: {
       splitChunks: {
-        cacheGroups: {
-          commons: {
-            chunks: 'initial',
-            minChunks: 2, maxInitialRequests: 5,
-            minSize: 0
-          },
-          vendor: {
-            test: /node_modules/,
-            chunks: 'initial',
-            name: 'vendor',
-            priority: 10,
-            enforce: true
-          }
-        },
+        chunks: 'all'
+        // cacheGroups: {
+        //   commons: {
+        //     chunks: 'initial',
+        //     minChunks: 2, maxInitialRequests: 5,
+        //     minSize: 0
+        //   },
+        //   vendor: {
+        //     test: /node_modules/,
+        //     chunks: 'initial',
+        //     name: 'vendor',
+        //     priority: 10,
+        //     enforce: true
+        //   }
+        // },
       },
       runtimeChunk: true
     }
