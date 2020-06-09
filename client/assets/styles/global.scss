@@ -10,7 +10,7 @@ body{
   background-position: center;
   font: 14px 'Helvetica Neue', Helvetica, Arial, sans-serif;
   color: #4d4d4d;
-  // font-smoothing: antialiased;
+  font-smoothing: antialiased;
   font-weight: 300;
 }
 
@@ -18,9 +18,11 @@ body{
   box-sizing: border-box
 }
 
-.fade-enter-active, .fade-leave-active {
-  transition: opacity .5s;
-}
-.fade-enter, .fade-leave-to {
-  opacity: 0;
+:global {
+  .fade-enter-active, .fade-leave-active {
+    transition: opacity .5s;
+  }
+  .fade-enter, .fade-leave-to {
+    opacity: 0;
+  }
 }

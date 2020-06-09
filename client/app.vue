@@ -3,25 +3,31 @@
     <div id="cover"></div>
     <Header></Header>
     <!-- <Todo></Todo> -->
-    <router-link to="/app">app</router-link>
+    <router-link :to="{name: 'app'}">app</router-link>
     <router-link to="login">login</router-link>
-    <router-view />
+    <transition name="fade" mode="out-in">
+      <router-view />
+    </transition>
     <Footer></Footer>
+    <router-view name="a" />
   </div>
 </template>
 
 <script>
 import Header from './layout/header.vue'
 import Footer from './layout/footer.jsx'
-import Todo from './views/todo/todo.vue'
+// import Todo from './views/todo/todo.vue'
 
 console.log(Header.__docs)
 
 export default {
   components: {
     Header,
-    Footer,
-    Todo
+    Footer
+    // Todo
+  },
+  mounted () {
+    console.log(this.$route)
   }
 }
 </script>
@@ -45,16 +51,16 @@ export default {
     }
   }
 
-#loading{
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  background-color: rgba(255,255,255,.3);
-  z-index: 99;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+  #loading{
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(255,255,255,.3);
+    z-index: 99;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 </style>
