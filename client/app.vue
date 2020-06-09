@@ -2,7 +2,7 @@
   <div id="app">
     <div id="cover"></div>
     <Header></Header>
-    <p>{{count}}</p>
+    <p>{{fullName}} {{count}}</p>
     <!-- <Todo></Todo> -->
     <router-link :to="{name: 'app'}">app</router-link>
     <router-link to="login">login</router-link>
@@ -18,6 +18,7 @@
 import Header from './layout/header.vue'
 import Footer from './layout/footer.jsx'
 // import Todo from './views/todo/todo.vue'
+import { mapState, mapGetters, mapMutations, mapActions } from 'vuex'
 
 console.log(Header.__docs)
 
@@ -28,17 +29,39 @@ export default {
     // Todo
   },
   computed: {
-    count () {
-      return this.$store.state.count
-    }
+    ...mapState(['count']),
+    ...mapGetters(['fullName'])
+    // count () {
+    //   return this.$store.state.count
+    // },
+    // fullName () {
+    //   return this.$store.getters.fullName
+    // }
+  },
+  methods: {
+    ...mapMutations(['updateCount']),
+    ...mapActions(['updateCountAsync'])
   },
   mounted () {
     console.log(this.$route)
     console.log(this.$store)
+    // this.$store.state.count = 11
     let i = 1
+    // setInterval(() => {
+    //   this.$store.commit('updateCount', i++)
+    // }, 1000)
+    // this.$store.dispatch('updateCountAsync', {
+    //   num: 1,
+    //   time: 1000
+    // })
+
     setInterval(() => {
-      this.$store.commit('updateCount', i++)
+      this.updateCount(i++)
     }, 1000)
+    // this.updateCountAsync({
+    //   num: 15,
+    //   time: 1000
+    // })
   }
 }
 </script>
