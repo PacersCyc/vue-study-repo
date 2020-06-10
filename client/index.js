@@ -15,6 +15,20 @@ document.body.appendChild(root)
 const router = createRouter()
 const store = createStore()
 
+store.registerModule('c', {
+  state: {
+    text: 3
+  }
+})
+
+store.watch((state) => state.count + 1, (newCount) => {
+  console.log('new count watched', newCount)
+})
+
+store.subscribe((mutation, state) => {
+  console.log(mutation.type, mutation.payload)
+})
+
 router.beforeEach((to, from, next) => {
   console.log('beforeEach')
   next()

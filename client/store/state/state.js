@@ -1,5 +1,5 @@
 export default {
-  count: 0,
+  count: 3,
   firstName: 'cyc',
   lastName: 'C'
 }

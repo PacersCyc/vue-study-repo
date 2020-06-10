@@ -2,7 +2,7 @@
   <div id="app">
     <div id="cover"></div>
     <Header></Header>
-    <p>{{fullName}} {{count}}</p>
+    <p>{{fullName}} {{count}} abb</p>
     <!-- <Todo></Todo> -->
     <router-link :to="{name: 'app'}">app</router-link>
     <router-link to="login">login</router-link>
@@ -29,6 +29,9 @@ export default {
     // Todo
   },
   computed: {
+    textA () {
+      return this.$store.state.a.text
+    },
     ...mapState(['count']),
     ...mapGetters(['fullName'])
     // count () {
@@ -62,6 +65,8 @@ export default {
     //   num: 15,
     //   time: 1000
     // })
+
+    // this.updateText('112233')
   }
 }
 </script>
