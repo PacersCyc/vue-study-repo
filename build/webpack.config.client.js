@@ -2,6 +2,7 @@ const path = require('path')
 const webpack = require('webpack')
 const merge = require('webpack-merge')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
+const VueClientPlugin = require('vue-server-renderer/client-plugin')
 const HtmlPlugin = require('html-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
@@ -33,6 +34,7 @@ const defaultPlugins = [
   new CleanWebpackPlugin(),
   new VueLoaderPlugin(),
   new HtmlPlugin(),
+  new VueClientPlugin(),
   new webpack.DefinePlugin({
     'process.env': {
       NODE_ENV: isDev ? '"development"' : '"production"'
