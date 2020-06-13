@@ -1,6 +1,7 @@
 const path = require('path')
 const webpack = require('webpack')
 const merge = require('webpack-merge')
+const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const VueServerPlugin = require('vue-server-renderer/server-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
@@ -29,18 +30,14 @@ config = merge(baseConfig, {
   externals: Object.keys(require('../package.json').dependencies),
   module: {
     rules: [
+      // MiniCssExtractPlugin会使用document window等dom api造成ssr渲染时报错，故不在server配置中使用
       {
-        test: /\.s[ac]ss$/,
+        test: /\.s(a|c)ss$/,
         oneOf: [
           {
             resourceQuery: /module/,
             use: [
-              {
-                loader: MiniCssExtractPlugin.loader,
-                options: {
-                  hmr: process.env.NODE_ENV === 'development',
-                },
-              },
+              'vue-style-loader',
               {
                 loader: 'css-loader',
                 options: cssLoaderOptions
@@ -57,12 +54,7 @@ config = merge(baseConfig, {
           {
             resourceQuery: /scoped/,
             use: [
-              {
-                loader: MiniCssExtractPlugin.loader,
-                options: {
-                  hmr: process.env.NODE_ENV === 'development',
-                },
-              },
+              'vue-style-loader',
               'css-loader',
               {
                 loader: 'postcss-loader',
@@ -75,12 +67,7 @@ config = merge(baseConfig, {
           },
           {
             use: [
-              {
-                loader: MiniCssExtractPlugin.loader,
-                options: {
-                  hmr: process.env.NODE_ENV === 'development',
-                },
-              },
+              'vue-style-loader',
               {
                 loader: 'css-loader',
                 options: cssLoaderOptions
@@ -96,10 +83,78 @@ config = merge(baseConfig, {
           }
         ]
       }
+      // {
+      //   test: /\.s[ac]ss$/,
+      //   oneOf: [
+      //     {
+      //       resourceQuery: /module/,
+      //       use: [
+      //         {
+      //           loader: MiniCssExtractPlugin.loader,
+      //           options: {
+      //             hmr: process.env.NODE_ENV === 'development',
+      //           },
+      //         },
+      //         {
+      //           loader: 'css-loader',
+      //           options: cssLoaderOptions
+      //         },
+      //         {
+      //           loader: 'postcss-loader',
+      //           options: {
+      //             sourceMap: true
+      //           }
+      //         },
+      //         'sass-loader'
+      //       ]
+      //     },
+      //     {
+      //       resourceQuery: /scoped/,
+      //       use: [
+      //         {
+      //           loader: MiniCssExtractPlugin.loader,
+      //           options: {
+      //             hmr: process.env.NODE_ENV === 'development',
+      //           },
+      //         },
+      //         'css-loader',
+      //         {
+      //           loader: 'postcss-loader',
+      //           options: {
+      //             sourceMap: true
+      //           }
+      //         },
+      //         'sass-loader'
+      //       ]
+      //     },
+      //     {
+      //       use: [
+      //         {
+      //           loader: MiniCssExtractPlugin.loader,
+      //           options: {
+      //             hmr: process.env.NODE_ENV === 'development',
+      //           },
+      //         },
+      //         {
+      //           loader: 'css-loader',
+      //           options: cssLoaderOptions
+      //         },
+      //         {
+      //           loader: 'postcss-loader',
+      //           options: {
+      //             sourceMap: true
+      //           }
+      //         },
+      //         'sass-loader'
+      //       ]
+      //     }
+      //   ]
+      // }
     ]
   },
   plugins: [
     new CleanWebpackPlugin(),
+    new VueLoaderPlugin(),
     new MiniCssExtractPlugin({
       filename: '[name].[contenthash].css',
       // chunkFilename: '[id].[contenthash].css'

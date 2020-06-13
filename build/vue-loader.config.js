@@ -3,6 +3,6 @@ module.exports = function(isDev) {
     compilerOptions: {
       preserveWhiteSpace: true
     },
-    extractCSS: !isDev,
+    // extractCSS: !isDev,
   }
 }
