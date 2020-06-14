@@ -14,8 +14,8 @@ const config = {
   entry: path.join(__dirname, '../client/client-entry.js'),
   output: {
     filename: 'bundle.[hash:8].js',
-    path: path.join(__dirname, '../dist'),
-    publicPath: 'http://127.0.0.1:8000/public/'
+    path: path.join(__dirname, '../public'),
+    publicPath: isDev ? 'http://127.0.0.1:8000/public/' : '/public/'
   },
   module: {
     rules: [

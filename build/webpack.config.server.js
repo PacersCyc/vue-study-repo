@@ -86,18 +86,21 @@ config = merge(baseConfig, {
     ]
   },
   plugins: [
-    new CleanWebpackPlugin(),
     new VueLoaderPlugin(),
-    new MiniCssExtractPlugin({
-      filename: '[name].[contenthash].css',
-      // chunkFilename: '[id].[contenthash].css'
-    }),
+    // new MiniCssExtractPlugin({
+    //   filename: '[name].[contenthash].css',
+    //   // chunkFilename: '[id].[contenthash].css'
+    // }),
+    new VueServerPlugin(),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development'),
       'process.env.VUE_ENV': '"server"'
-    }),
-    new VueServerPlugin()
+    })
   ]
 })
+
+// if (isDev) {
+//   config.plugins.push(new VueServerPlugin())
+// }
 
 module.exports = config

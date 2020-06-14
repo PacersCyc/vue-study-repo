@@ -7,12 +7,14 @@
   "license": "MIT",
   "scripts": {
     "build:client": "cross-env NODE_ENV=production webpack --config build/webpack.config.client.js",
-    "clean": "rimraf dist",
+    "build:server": "cross-env NODE_ENV=production webpack --config build/webpack.config.server.js",
+    "clean": "rimraf public && rimraf server-build",
     "learn": "cross-env NODE_ENV=development webpack-dev-server --config build/webpack.config.learn.js",
     "dev:client": "cross-env NODE_ENV=development webpack-dev-server --config build/webpack.config.client.js",
     "dev:server": "nodemon server/server.js",
     "dev": "concurrently \"yarn dev:client\" \"yarn dev:server\"",
-    "build": "yarn clean && yarn build:client",
+    "build": "yarn clean && yarn build:client && yarn build:server",
+    "start": "cross-env NODE_ENV=production node server/server.js",
     "lint": "eslint --ext .js,.jsx,.vue client/",
     "lint-fix": "eslint --fix --ext .js,.jsx,.vue client/"
   },
