@@ -4,6 +4,8 @@
 
 <script>
 export default {
-
+  metaInfo: {
+    title: 'Login Page'
+  }
 }
 </script>

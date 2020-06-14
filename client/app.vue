@@ -23,6 +23,9 @@ import { mapState, mapGetters, mapMutations, mapActions } from 'vuex'
 console.log(Header.__docs)
 
 export default {
+  metaInfo: {
+    title: 'Cyc\'s Todo App'
+  },
   components: {
     Header,
     Footer
@@ -46,6 +49,7 @@ export default {
     ...mapActions(['updateCountAsync'])
   },
   mounted () {
+    console.log(this)
     console.log(this.$route)
     console.log(this.$store)
     // this.$store.state.count = 11

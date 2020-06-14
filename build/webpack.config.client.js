@@ -33,7 +33,9 @@ const cssLoaderOptions = {
 const defaultPlugins = [
   new CleanWebpackPlugin(),
   new VueLoaderPlugin(),
-  new HtmlPlugin(),
+  new HtmlPlugin({
+    template: path.join(__dirname, 'template.html')
+  }),
   new VueClientPlugin(),
   new webpack.DefinePlugin({
     'process.env': {
@@ -46,7 +48,7 @@ let config
 
 if (isDev) {
   config = merge(baseConfig, {
-    // devtool: 'cheap-module-eval-source=-map', // 默认项
+    devtool: '#@cheap-module-eval-source-map', // 默认项
     module: {
       rules: [
         {
@@ -112,10 +114,7 @@ if (isDev) {
 } else {
   config = merge(baseConfig, {
     entry: {
-      app: path.join(__dirname, '../client/index.js'),
-      // vendor: [
-      //   'vue',
-      // ]
+      app: path.join(__dirname, '../client/client-entry.js'),
     },
     output: {
       filename: '[name].[chunkhash:8].js'

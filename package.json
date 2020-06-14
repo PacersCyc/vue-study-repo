@@ -70,6 +70,7 @@
     "koa-router": "^9.0.1",
     "koa-send": "^5.0.0",
     "vue": "^2.6.11",
+    "vue-meta": "^2.4.0",
     "vue-router": "^3.3.2",
     "vue-server-renderer": "^2.6.11",
     "vuex": "^3.4.0"
