@@ -9,9 +9,9 @@ import './assets/styles/global.scss'
 Vue.use(VueRouter)
 Vue.use(Vuex)
 
-const root = document.createElement('div')
-document.body.appendChild(root)
-console.log('root')
+// const root = document.createElement('div')
+// document.body.appendChild(root)
+// console.log('root')
 
 const router = createRouter()
 const store = createStore()
@@ -48,4 +48,4 @@ new Vue({
   render: h => h(App),
   router,
   store
-}).$mount(root)
+}).$mount('#root')

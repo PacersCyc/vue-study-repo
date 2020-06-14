@@ -1,7 +1,6 @@
 import createApp from './create-app'
 
 export default context => {
-  console.log('context', context)
   return new Promise((resolve, reject) => {
     const { app, router } = createApp()
 

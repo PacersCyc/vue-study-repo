@@ -30,7 +30,7 @@ config = merge(baseConfig, {
   externals: Object.keys(require('../package.json').dependencies),
   module: {
     rules: [
-      // MiniCssExtractPlugin会使用document window等dom api造成ssr渲染时报错，故不在server配置中使用
+      // MiniCssExtractPlugin会使用document window等dom api造成ssr渲染时报错，故不在server配置中使用, 具体见 https://segmentfault.com/a/1190000020782379
       {
         test: /\.s(a|c)ss$/,
         oneOf: [
@@ -83,73 +83,6 @@ config = merge(baseConfig, {
           }
         ]
       }
-      // {
-      //   test: /\.s[ac]ss$/,
-      //   oneOf: [
-      //     {
-      //       resourceQuery: /module/,
-      //       use: [
-      //         {
-      //           loader: MiniCssExtractPlugin.loader,
-      //           options: {
-      //             hmr: process.env.NODE_ENV === 'development',
-      //           },
-      //         },
-      //         {
-      //           loader: 'css-loader',
-      //           options: cssLoaderOptions
-      //         },
-      //         {
-      //           loader: 'postcss-loader',
-      //           options: {
-      //             sourceMap: true
-      //           }
-      //         },
-      //         'sass-loader'
-      //       ]
-      //     },
-      //     {
-      //       resourceQuery: /scoped/,
-      //       use: [
-      //         {
-      //           loader: MiniCssExtractPlugin.loader,
-      //           options: {
-      //             hmr: process.env.NODE_ENV === 'development',
-      //           },
-      //         },
-      //         'css-loader',
-      //         {
-      //           loader: 'postcss-loader',
-      //           options: {
-      //             sourceMap: true
-      //           }
-      //         },
-      //         'sass-loader'
-      //       ]
-      //     },
-      //     {
-      //       use: [
-      //         {
-      //           loader: MiniCssExtractPlugin.loader,
-      //           options: {
-      //             hmr: process.env.NODE_ENV === 'development',
-      //           },
-      //         },
-      //         {
-      //           loader: 'css-loader',
-      //           options: cssLoaderOptions
-      //         },
-      //         {
-      //           loader: 'postcss-loader',
-      //           options: {
-      //             sourceMap: true
-      //           }
-      //         },
-      //         'sass-loader'
-      //       ]
-      //     }
-      //   ]
-      // }
     ]
   },
   plugins: [

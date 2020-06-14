@@ -9,7 +9,7 @@ module.exports = async (ctx, renderer, template) => {
 
   try {
     const appString = await renderer.renderToString(context)
-    console.log('appstr', appString)
+
     const html = ejs.render(template, {
       appString,
       style: context.renderStyles(),
