@@ -2,13 +2,15 @@
   <div id="app">
     <div id="cover"></div>
     <Header></Header>
-    <p>{{fullName}} {{count}} abb</p>
+    <!-- <p>{{fullName}} {{count}} abb</p> -->
     <!-- <Todo></Todo> -->
-    <router-link :to="{name: 'app'}">app</router-link>
-    <router-link to="login">login</router-link>
+    <!-- <router-link :to="{name: 'app'}">app</router-link>
+    <router-link to="login">login</router-link> -->
     <transition name="fade" mode="out-in">
       <router-view />
     </transition>
+    <button @click="notify">notify</button>
+    <!-- <notification content="test notify"></notification> -->
     <Footer></Footer>
     <router-view name="a" />
   </div>
@@ -46,14 +48,21 @@ export default {
   },
   methods: {
     ...mapMutations(['updateCount']),
-    ...mapActions(['updateCountAsync'])
+    ...mapActions(['updateCountAsync']),
+    notify () {
+      this.$notify({
+        content: 'test $notify',
+        btn: 'close'
+      })
+    }
   },
   mounted () {
     console.log(this)
     console.log(this.$route)
     console.log(this.$store)
+
     // this.$store.state.count = 11
-    let i = 1
+    // let i = 1
     // setInterval(() => {
     //   this.$store.commit('updateCount', i++)
     // }, 1000)
@@ -62,9 +71,9 @@ export default {
     //   time: 1000
     // })
 
-    setInterval(() => {
-      this.updateCount(i++)
-    }, 1000)
+    // setInterval(() => {
+    //   this.updateCount(i++)
+    // }, 1000)
     // this.updateCountAsync({
     //   num: 15,
     //   time: 1000

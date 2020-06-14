@@ -13,6 +13,9 @@ const isDev = process.env.NODE_ENV === 'development'
 const devServer = {
   port: 8000,
   host: '0.0.0.0',
+  headers: {
+    "Access-Control-Allow-Origin": "*"
+  },
   overlay: {
     errors: true
   },
