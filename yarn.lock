@@ -1698,6 +1698,14 @@ buffer@^4.3.0:
     ieee754 "^1.1.4"
     isarray "^1.0.0"
 
+buffer@^5.1.0:
+  version "5.6.0"
+  resolved "https://registry.npm.taobao.org/buffer/download/buffer-5.6.0.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fbuffer%2Fdownload%2Fbuffer-5.6.0.tgz#a31749dc7d81d84db08abf937b6b8c4033f62786"
+  integrity sha1-oxdJ3H2B2E2wir+Te2uMQDP2J4Y=
+  dependencies:
+    base64-js "^1.0.2"
+    ieee754 "^1.1.4"
+
 builtin-status-codes@^3.0.0:
   version "3.0.0"
   resolved "https://registry.npm.taobao.org/builtin-status-codes/download/builtin-status-codes-3.0.0.tgz#85982878e21b98e1c66425e03d0174788f569ee8"
@@ -2242,7 +2250,7 @@ core-js-compat@^3.6.2:
     browserslist "^4.8.5"
     semver "7.0.0"
 
-core-util-is@1.0.2, core-util-is@~1.0.0:
+core-util-is@1.0.2, core-util-is@^1.0.2, core-util-is@~1.0.0:
   version "1.0.2"
   resolved "https://registry.npm.taobao.org/core-util-is/download/core-util-is-1.0.2.tgz#b5fd54220aa2bc5ab57aab7140c940754503c1a7"
   integrity sha1-tf1UIgqivFq1eqtxQMlAdUUDwac=
@@ -2267,6 +2275,13 @@ cosmiconfig@^6.0.0:
     parse-json "^5.0.0"
     path-type "^4.0.0"
     yaml "^1.7.2"
+
+crc@^3.4.4:
+  version "3.8.0"
+  resolved "https://registry.npm.taobao.org/crc/download/crc-3.8.0.tgz#ad60269c2c856f8c299e2c4cc0de4556914056c6"
+  integrity sha1-rWAmnCyFb4wpnixMwN5FVpFAVsY=
+  dependencies:
+    buffer "^5.1.0"
 
 create-ecdh@^4.0.0:
   version "4.0.3"
@@ -4334,6 +4349,11 @@ is-ci@^2.0.0:
   dependencies:
     ci-info "^2.0.0"
 
+is-class-hotfix@~0.0.6:
+  version "0.0.6"
+  resolved "https://registry.npm.taobao.org/is-class-hotfix/download/is-class-hotfix-0.0.6.tgz#a527d31fb23279281dde5f385c77b5de70a72435"
+  integrity sha1-pSfTH7IyeSgd3l84XHe13nCnJDU=
+
 is-data-descriptor@^0.1.4:
   version "0.1.4"
   resolved "https://registry.npm.taobao.org/is-data-descriptor/download/is-data-descriptor-0.1.4.tgz#0b5ee648388e2c860282e793f1856fec3f301b56"
@@ -4523,6 +4543,15 @@ is-symbol@^1.0.2:
   integrity sha1-OOEBS55jKb4N6dJKQU/XRB7GGTc=
   dependencies:
     has-symbols "^1.0.1"
+
+is-type-of@^1.0.0:
+  version "1.2.1"
+  resolved "https://registry.npm.taobao.org/is-type-of/download/is-type-of-1.2.1.tgz#e263ec3857aceb4f28c47130ec78db09a920f8c5"
+  integrity sha1-4mPsOFes608oxHEw7HjbCakg+MU=
+  dependencies:
+    core-util-is "^1.0.2"
+    is-class-hotfix "~0.0.6"
+    isstream "~0.1.2"
 
 is-typedarray@^1.0.0, is-typedarray@~1.0.0:
   version "1.0.0"
@@ -4777,6 +4806,16 @@ koa-send@^5.0.0:
     http-errors "^1.6.3"
     mz "^2.7.0"
     resolve-path "^1.4.0"
+
+koa-session@^6.0.0:
+  version "6.0.0"
+  resolved "https://registry.npm.taobao.org/koa-session/download/koa-session-6.0.0.tgz?cache=0&sync_timestamp=1588091260677&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fkoa-session%2Fdownload%2Fkoa-session-6.0.0.tgz#abe0a1083caa362277d7923c0b3c6474c980c348"
+  integrity sha1-q+ChCDyqNiJ315I8CzxkdMmAw0g=
+  dependencies:
+    crc "^3.4.4"
+    debug "^3.1.0"
+    is-type-of "^1.0.0"
+    uuid "^3.3.2"
 
 koa@^2.12.0:
   version "2.12.0"
