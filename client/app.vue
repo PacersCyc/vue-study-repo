@@ -1,6 +1,9 @@
 <template>
   <div id="app">
     <div id="cover"></div>
+    <div id="loading" v-show="loading">
+      <loading></loading>
+    </div>
     <Header></Header>
     <!-- <p>{{fullName}} {{count}} abb</p> -->
     <!-- <Todo></Todo> -->
@@ -19,8 +22,9 @@
 <script>
 import Header from './layout/header.vue'
 import Footer from './layout/footer.jsx'
+import Loading from './components/loading/loading.vue'
 // import Todo from './views/todo/todo.vue'
-// import { mapState, mapGetters, mapMutations, mapActions } from 'vuex'
+import { mapState } from 'vuex'
 
 console.log(Header.__docs)
 
@@ -30,10 +34,12 @@ export default {
   },
   components: {
     Header,
-    Footer
+    Footer,
+    Loading
     // Todo
   },
   computed: {
+    ...mapState(['loading'])
     // textA () {
     //   return this.$store.state.a.text
     // },
