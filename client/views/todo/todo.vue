@@ -40,6 +40,7 @@
 <script>
 import Item from './item.vue'
 import Helper from './helper.vue'
+import { mapState, mapActions } from 'vuex'
 
 let id = 0
 export default {
@@ -61,6 +62,7 @@ export default {
   },
 
   computed: {
+    ...mapState(['todos']),
     filteredTodos () {
       if (this.filter === 'all') {
         return this.todos
@@ -70,9 +72,10 @@ export default {
     }
   },
   mounted () {
-
+    this.fetchTodos()
   },
   methods: {
+    ...mapActions(['fetchTodos']),
     addTodo (e) {
       this.todos.unshift({
         id: id++,

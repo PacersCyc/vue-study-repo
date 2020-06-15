@@ -22,6 +22,7 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 export default {
   metaInfo: {
     title: 'Login Page'
@@ -34,10 +35,16 @@ export default {
     }
   },
   methods: {
+    ...mapActions(['login']),
     doSubmit (e) {
       e.preventDefault()
       if (this.validate()) {
+        this.login({
+          username: this.username,
+          password: this.password
+        }).then(res => {
 
+        })
       }
     },
     validate () {
