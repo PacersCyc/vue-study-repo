@@ -9,7 +9,7 @@
     <transition name="fade" mode="out-in">
       <router-view />
     </transition>
-    <button @click="notify">notify</button>
+    <!-- <button @click="notify">notify</button> -->
     <!-- <notification content="test notify"></notification> -->
     <Footer></Footer>
     <router-view name="a" />
@@ -20,7 +20,7 @@
 import Header from './layout/header.vue'
 import Footer from './layout/footer.jsx'
 // import Todo from './views/todo/todo.vue'
-import { mapState, mapGetters, mapMutations, mapActions } from 'vuex'
+// import { mapState, mapGetters, mapMutations, mapActions } from 'vuex'
 
 console.log(Header.__docs)
 
@@ -34,11 +34,11 @@ export default {
     // Todo
   },
   computed: {
-    textA () {
-      return this.$store.state.a.text
-    },
-    ...mapState(['count']),
-    ...mapGetters(['fullName'])
+    // textA () {
+    //   return this.$store.state.a.text
+    // },
+    // ...mapState(['count']),
+    // ...mapGetters(['fullName'])
     // count () {
     //   return this.$store.state.count
     // },
@@ -47,8 +47,8 @@ export default {
     // }
   },
   methods: {
-    ...mapMutations(['updateCount']),
-    ...mapActions(['updateCountAsync']),
+    // ...mapMutations(['updateCount']),
+    // ...mapActions(['updateCountAsync']),
     notify () {
       this.$notify({
         content: 'test $notify',
