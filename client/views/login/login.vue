@@ -43,7 +43,7 @@ export default {
           username: this.username,
           password: this.password
         }).then(res => {
-
+          this.$router.replace('/app')
         })
       }
     },

@@ -20,13 +20,14 @@
       class="add-input"
       autofocus
       placeholder="接下去要做什么"
-      @keyup.enter="addTodo"
+      @keyup.enter="handleAdd"
     >
     <Item
       v-for="todo in filteredTodos"
       :todo="todo"
       :key="todo.id"
       @del="deleteTodo"
+      @toggle='toggleTodoState'
     />
     <Helper
       :filter="filter"
@@ -42,7 +43,7 @@ import Item from './item.vue'
 import Helper from './helper.vue'
 import { mapState, mapActions } from 'vuex'
 
-let id = 0
+// let id = 0
 export default {
   metaInfo: {
     title: 'The Todo App'
@@ -54,7 +55,7 @@ export default {
 
   data () {
     return {
-      todos: [],
+      // todos: [],
       filter: 'all',
       states: ['all', 'active', 'completed']
       // inputContent: ''
@@ -75,23 +76,36 @@ export default {
     this.fetchTodos()
   },
   methods: {
-    ...mapActions(['fetchTodos']),
-    addTodo (e) {
-      this.todos.unshift({
-        id: id++,
-        content: e.target.value.trim(),
+    ...mapActions(['fetchTodos', 'addTodo', 'deleteTodo', 'updateTodo', 'deleteAllCompleted']),
+    handleAdd (e) {
+      const content = e.target.value.trim()
+      if (!content) {
+        this.$notify({
+          content: '必须输入内容'
+        })
+        return
+      }
+      const todo = {
+        content,
         completed: false
-      })
+      }
+      this.addTodo(todo)
       e.target.value = ''
-    },
-    deleteTodo (id) {
-      this.todos.splice(this.todos.findIndex(item => item.id === id), 1)
     },
     // toggleFilter (state) {
     //   this.filter = state
     // },
+    toggleTodoState (todo) {
+      this.updateTodo({
+        id: todo.id,
+        todo: Object.assign({}, todo, {
+          completed: !todo.completed
+        })
+      })
+    },
     clearAllCompleted () {
-      this.todos = this.todos.filter(item => !item.completed)
+      // this.todos = this.todos.filter(item => !item.completed)
+      this.deleteAllCompleted()
     },
     handleChangeTab (index) {
       this.filter = index
