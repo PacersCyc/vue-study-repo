@@ -4,11 +4,16 @@ module.exports = async (ctx, renderer, template) => {
   ctx.headers['Content-Type'] = 'text/html'
 
   const context = {
-    url: ctx.path
+    url: ctx.path,
+    user: ctx.session.user
   }
 
   try {
     const appString = await renderer.renderToString(context)
+
+    if (context.router.currentRoute.fullPath !== ctx.path) {
+      return ctx.redirect(context.router.currentRoute.fullPath)
+    }
 
     const { title } = context.meta.inject()
 
@@ -16,7 +21,8 @@ module.exports = async (ctx, renderer, template) => {
       appString,
       style: context.renderStyles(),
       scripts: context.renderScripts(),
-      title: title.text()
+      title: title.text(),
+      initalState: context.renderState()
     })
     ctx.body = html
   } catch (error) {

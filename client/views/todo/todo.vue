@@ -73,10 +73,16 @@ export default {
     }
   },
   mounted () {
-    this.fetchTodos()
+    if (this.todos && this.todos.length < 1) {
+      this.fetchTodos()
+    }
   },
-  asyncData ({ store }) {
-    return store.dispatch('fetchTodos')
+  asyncData ({ store, router }) {
+    if (store.state.user) {
+      return store.dispatch('fetchTodos')
+    }
+    router.replace('/login')
+    return Promise.resolve()
   },
   methods: {
     ...mapActions(['fetchTodos', 'addTodo', 'deleteTodo', 'updateTodo', 'deleteAllCompleted']),

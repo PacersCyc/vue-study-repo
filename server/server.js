@@ -1,5 +1,5 @@
 // require('core-js/stable')
-require('regenerator-runtime/runtime')
+// require('regenerator-runtime/runtime')
 const path = require('path')
 const Koa = require('koa')
 const send = require('koa-send')
