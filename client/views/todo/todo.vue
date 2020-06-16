@@ -75,6 +75,9 @@ export default {
   mounted () {
     this.fetchTodos()
   },
+  asyncData ({ store }) {
+    return store.dispatch('fetchTodos')
+  },
   methods: {
     ...mapActions(['fetchTodos', 'addTodo', 'deleteTodo', 'updateTodo', 'deleteAllCompleted']),
     handleAdd (e) {

@@ -99,6 +99,12 @@ config = merge(baseConfig, {
   ]
 })
 
+config.resolve = {
+  alias: {
+    'model': path.join(__dirname, '../client/model/server-model.js')
+  }
+}
+
 // if (isDev) {
 //   config.plugins.push(new VueServerPlugin())
 // }
