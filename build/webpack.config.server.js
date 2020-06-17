@@ -91,7 +91,7 @@ config = merge(baseConfig, {
     //   filename: '[name].[contenthash].css',
     //   // chunkFilename: '[id].[contenthash].css'
     // }),
-    new VueServerPlugin(),
+    // new VueServerPlugin(), // 使用bundleRender才会用到
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development'),
       'process.env.VUE_ENV': '"server"'
