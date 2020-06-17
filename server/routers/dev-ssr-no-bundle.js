@@ -1,8 +1,8 @@
 const path = require('path')
 const fs = require('fs')
 // node冷门模块
-const NativeModule = require('module')
-const vm = require('vm')
+// const NativeModule = require('module')
+// const vm = require('vm')
 
 const Router = require('koa-router')
 const axios  = require('axios')
@@ -14,8 +14,8 @@ const serverRender = require('./server-render-no-bundle')
 const serverConfig = require('../../build/webpack.config.server')
 
 const serverCompiler = webpack(serverConfig)
-const mfs = new MemoryFs()
-serverCompiler.outputFileSystem = mfs
+// const mfs = new MemoryFs()
+// serverCompiler.outputFileSystem = mfs
 
 let bundle
 serverCompiler.watch({}, (err, stats) => {
@@ -31,21 +31,23 @@ serverCompiler.watch({}, (err, stats) => {
   })
 
   const bundlePath = path.join(serverConfig.output.path, 'server-entry.js')
+  delete require.cache[bundlePath]
+  bundle = require('../../server-build/server-entry').default
 
-  try {
-    const m = { exports: {} }
-    const bundleStr = mfs.readFileSync(bundlePath, 'utf-8')
-    const wrapper = NativeModule.wrap(bundleStr)
-    const script = new vm.Script(wrapper, {
-      filename: 'server-entry.js',
-      displayErrors: true
-    })
-    const result = script.runInThisContext()
-    result.call(m.exports, m.exports, require, m)
-    bundle = m.exports.default
-  } catch (error) {
-    console.error(error)
-  }
+  // try {
+  //   const m = { exports: {} }
+  //   const bundleStr = mfs.readFileSync(bundlePath, 'utf-8')
+  //   const wrapper = NativeModule.wrap(bundleStr)
+  //   const script = new vm.Script(wrapper, {
+  //     filename: 'server-entry.js',
+  //     displayErrors: true
+  //   })
+  //   const result = script.runInThisContext()
+  //   result.call(m.exports, m.exports, require, m)
+  //   bundle = m.exports.default
+  // } catch (error) {
+  //   console.error(error)
+  // }
 
   console.log('new bundle generated')
 })
